@@ -10,6 +10,7 @@ import (
 )
 
 func DeleteTask(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	println("Herere")
 	params := mux.Vars(r)

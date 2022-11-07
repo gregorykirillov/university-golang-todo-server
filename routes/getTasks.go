@@ -11,6 +11,7 @@ import (
 )
 
 func GetAllTasks(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	var tasks []models.Task
 	result := initializers.DB.Find(&tasks)
@@ -23,6 +24,7 @@ func GetAllTasks(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetTaskByID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	var task models.Task
 	params := mux.Vars(r)

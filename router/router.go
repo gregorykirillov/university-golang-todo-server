@@ -7,6 +7,7 @@ import (
 )
 
 func InitRoutes(router *mux.Router) {
+	router.Use(mux.CORSMethodMiddleware(router))
 	router.HandleFunc("/tasks", routes.GetAllTasks).Methods("GET")
 	router.HandleFunc("/task/{id}", routes.GetTaskByID).Methods("GET")
 	router.HandleFunc("/addTask", routes.AddTask).Methods("POST")
