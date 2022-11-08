@@ -1,16 +1,17 @@
 package router
 
 import (
-	"Go-todo-list/routes"
+	"net/http"
+	"todo-app/routes"
 
 	"github.com/gorilla/mux"
 )
 
 func InitRoutes(router *mux.Router) {
 	router.Use(mux.CORSMethodMiddleware(router))
-	router.HandleFunc("/tasks", routes.GetAllTasks).Methods("GET")
-	router.HandleFunc("/task/{id}", routes.GetTaskByID).Methods("GET")
-	router.HandleFunc("/addTask", routes.AddTask).Methods("POST")
-	router.HandleFunc("/updateTask/{id}", routes.UpdateTask).Methods("PUT")
-	router.HandleFunc("/deleteTask/{id}", routes.DeleteTask).Methods("DELETE")
+	router.HandleFunc("/tasks", routes.GetAllTasks).Methods(http.MethodGet)
+	router.HandleFunc("/task/{id}", routes.GetTaskByID).Methods(http.MethodGet)
+	router.HandleFunc("/addTask", routes.AddTask).Methods(http.MethodPost)
+	router.HandleFunc("/updateTask/{id}", routes.UpdateTask).Methods(http.MethodPut)
+	router.HandleFunc("/deleteTask/{id}", routes.DeleteTask).Methods(http.MethodDelete)
 }

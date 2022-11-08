@@ -1,20 +1,21 @@
 package routes
 
 import (
-	"Go-todo-list/initializers"
-	"Go-todo-list/models"
 	"encoding/json"
 	"net/http"
+	"todo-app/initializers"
+	"todo-app/models"
 
 	"github.com/gorilla/mux"
 )
 
 func DeleteTask(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
-	println("Herere")
 	params := mux.Vars(r)
-	if result := initializers.DB.Delete(&models.Task{}, params); result.Error != nil {
+
+	result := initializers.DB.Delete(&models.Task{}, params)
+
+	if result.Error != nil {
 		resp := make(map[string]string)
 		resp["status"] = "false"
 		resp["message"] = result.Error.Error()
@@ -26,4 +27,6 @@ func DeleteTask(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
+
+	json.NewEncoder(w).Encode(params)
 }
